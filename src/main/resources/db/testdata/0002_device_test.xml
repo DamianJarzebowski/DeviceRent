@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+    <changeSet id="0001-testdata-1" author="damianjarzebowski">
+        <insert tableName="device">
+            <column name="name" value="Młotowiertarka"/>
+            <column name="description" value="Idealna do burzenia ścian jak i wiercenia otworów"/>
+            <column name="quantity" value="5"/>
+            <column name="price" value="250"/>
+            <column name="category_id" value="1"/>
+        </insert>
+        <insert tableName="device">
+            <column name="name" value="Młotek 25kg"/>
+            <column name="description" value="Idealny by mocno uderzyć"/>
+            <column name="quantity" value="10"/>
+            <column name="price" value="50"/>
+            <column name="category_id" value="2"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
