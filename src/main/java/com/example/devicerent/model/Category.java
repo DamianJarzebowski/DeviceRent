@@ -6,18 +6,17 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Table(name="category")
 public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
+    @Column(length = 1024)
     private String description;
-
     @OneToMany(mappedBy = "category")
     private Set<Device> devices = new HashSet<>();
-
 
     public Long getId() {
         return id;
@@ -51,14 +50,12 @@ public class Category {
         this.devices = devices;
     }
 
-
     @Override
     public String toString() {
-        return "Category{" +
+        return "Kategoria{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", devices=" + devices +
+                ", nazwa='" + name + '\'' +
+                ", opis='" + description + '\'' +
                 '}';
     }
 
@@ -67,13 +64,14 @@ public class Category {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Category category = (Category) o;
-        return Objects.equals(id, category.id) && Objects.equals(name, category.name) && Objects.equals(description, category.description) && Objects.equals(devices, category.devices);
+        return Objects.equals(id, category.id) &&
+                Objects.equals(name, category.name) &&
+                Objects.equals(description, category.description) &&
+                Objects.equals(devices, category.devices);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, name, description, devices);
     }
-
-
 }

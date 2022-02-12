@@ -6,15 +6,19 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name="customer")
 public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
+    @Column(length = 11)
     private String pesel;
+    @Column(name = "id_number", length = 10)
     private String idNumber;
     @ManyToMany(mappedBy = "customers")
     private List<Device> rentDevices = new ArrayList<>();
@@ -69,13 +73,12 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
+        return "Klient{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", imię='" + firstName + '\'' +
+                ", nazwisko='" + lastName + '\'' +
                 ", pesel='" + pesel + '\'' +
-                ", idNumber='" + idNumber + '\'' +
-                ", rentDevices=" + rentDevices +
+                ", nr dowodu='" + idNumber + '\'' +
                 '}';
     }
 
@@ -84,7 +87,12 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(id, customer.id) && Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName) && Objects.equals(pesel, customer.pesel) && Objects.equals(idNumber, customer.idNumber) && Objects.equals(rentDevices, customer.rentDevices);
+        return Objects.equals(id, customer.id) &&
+                Objects.equals(firstName, customer.firstName) &&
+                Objects.equals(lastName, customer.lastName) &&
+                Objects.equals(pesel, customer.pesel) &&
+                Objects.equals(idNumber, customer.idNumber) &&
+                Objects.equals(rentDevices, customer.rentDevices);
     }
 
     @Override
