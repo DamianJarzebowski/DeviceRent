@@ -18,8 +18,7 @@ public class DeviceRentApp {
         var customerRepository = context.getBean(CustomerRepository.class);
         var deviceRepository = context.getBean(DeviceRepository.class);
          */
-        var dupa = new Scanner(System.in);
-        //dupa.nextLine();
+
 
 
     }
