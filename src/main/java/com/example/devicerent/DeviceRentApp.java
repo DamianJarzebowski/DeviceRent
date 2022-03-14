@@ -13,7 +13,7 @@ public class DeviceRentApp {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(DeviceRentApp.class, args);
 
-        System.out.println(A);
+        System.out.println();
 
     }
 }
