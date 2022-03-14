@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+    <changeSet id="0001-1" author="damianjarzebowski">
+
+        <createIndex indexName="IX_device_customers_1" tableName="device_customers" unique="true" >
+            <column name="device_id" />
+            <column name="customer_id" />
+        </createIndex>
+
+        <addForeignKeyConstraint
+                constraintName="FK_device_customers_1"
+
+                baseColumnNames="customer_id"
+                baseTableName="device_customers"
+
+                referencedColumnNames="id"
+                referencedTableName="customer"
+                validate="true"/>
+
+        <addForeignKeyConstraint
+                constraintName="FK_device_customers_2"
+
+                baseColumnNames="device_id"
+                baseTableName="device_customers"
+
+                referencedColumnNames="id"
+                referencedTableName="device"
+                validate="true"/>
+
+    </changeSet>
+
+</databaseChangeLog>
