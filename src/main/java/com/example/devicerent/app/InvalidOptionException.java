@@ -1,4 +1,8 @@
 package com.example.devicerent.app;
 
-public class InvalidOptionException {
+class InvalidOptionException extends RuntimeException {
+    InvalidOptionException(String message) {
+        super(message);
+    }
 }
+
