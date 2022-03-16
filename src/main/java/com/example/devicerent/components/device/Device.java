@@ -1,4 +1,7 @@
-package com.example.devicerent.model;
+package com.example.devicerent.components.device;
+
+import com.example.devicerent.components.category.Category;
+import com.example.devicerent.components.customer.Customer;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,7 +23,7 @@ public class Device {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "device_customers",
             joinColumns = {@JoinColumn(name="device_id", referencedColumnName="id")},
             inverseJoinColumns = {@JoinColumn(name="customer_id", referencedColumnName="id")}

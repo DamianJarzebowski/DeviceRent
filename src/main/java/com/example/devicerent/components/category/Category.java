@@ -1,4 +1,6 @@
-package com.example.devicerent.model;
+package com.example.devicerent.components.category;
+
+import com.example.devicerent.components.device.Device;
 
 import javax.persistence.*;
 import java.util.HashSet;
