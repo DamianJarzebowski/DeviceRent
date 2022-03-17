@@ -8,7 +8,8 @@ enum Options {
     REMOVE_DEVICE(5, "Usuń urządzenie"),
     REMOVE_CATEGORY(6, "Usuń kategorię"),
     REMOVE_CUSTOMER(7, "Usuń klienta"),
-    EXIT(8, "Koniec");
+    SEARCH_DEVICE(8, "Szukaj urządzenia o nazwie"),
+    EXIT(9, "Koniec");
 
     private final int number;
     private final String name;

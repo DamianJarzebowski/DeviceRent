@@ -21,7 +21,7 @@ public class CustomerController {
     public void createCustomer() {
         Customer customer = readCustomer();
         customerRepository.save(customer);
-        System.out.println("Dodano klienta" + customer);
+        System.out.println("Dodano klienta" + " " + customer);
     }
 
     private Customer readCustomer() {

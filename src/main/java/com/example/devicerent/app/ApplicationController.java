@@ -80,6 +80,8 @@ public class ApplicationController {
             case REMOVE_CUSTOMER:
                 customerController.removeCustomer();
                 break;
+            case SEARCH_DEVICE:
+                deviceController.searchDevice();
             case EXIT:
                 closeApp();
         }

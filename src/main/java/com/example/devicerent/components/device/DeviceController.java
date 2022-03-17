@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -17,9 +18,10 @@ public class DeviceController {
     private CategoryRepository categoryRepository;
 
     @Autowired
-    public DeviceController(Scanner scanner, DeviceRepository deviceRepository) {
+    public DeviceController(Scanner scanner, DeviceRepository deviceRepository, CategoryRepository categoryRepository) {
         this.scanner = scanner;
         this.deviceRepository = deviceRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @Transactional
@@ -27,9 +29,10 @@ public class DeviceController {
         try {
             Device device = readDevice();
             deviceRepository.save(device);
-            System.out.println("Dodano urządzenie" + device);
+            System.out.println("Dodano urządzenie" + " " + device);
         } catch (CategoryNotFoundException e) {
-            System.err.println("Urządzenia nie dodano." + e.getMessage());;
+            System.err.println("Urządzenia nie dodano." + e.getMessage());
+            ;
         }
     }
 
@@ -44,12 +47,11 @@ public class DeviceController {
         System.out.println("Ilość(szt) urządzenia:");
         device.setQuantity(scanner.nextInt());
         System.out.println("Kategoria(id) urządzenia:");
-        long categoryId = scanner.nextLong();
-        Optional<Category> category = categoryRepository.findById(categoryId);
-        scanner.nextLine();
+        String categoryName = scanner.nextLine();
+        Optional<Category> category = categoryRepository.findByNameIgnoreCase(categoryName);
         category.ifPresentOrElse(device::setCategory,
                 () -> {
-                    throw new CategoryNotFoundException("Kategoria o podanym ID nie istnieje");
+                    throw new CategoryNotFoundException("Kategoria o takiej nazwie nie istnieje");
                 }
         );
         return device;
@@ -60,5 +62,17 @@ public class DeviceController {
         long deviceId = scanner.nextLong();
         Optional<Device> device = deviceRepository.findById(deviceId);
         device.ifPresentOrElse(deviceRepository::delete, () -> System.out.println("Brak urządzenia o wskazanym ID"));
+    }
+
+    public void searchDevice() {
+        System.out.println("Podaj fragment nazwy:");
+        String name = scanner.nextLine();
+        List<Device> devices = deviceRepository.findAllByNameContainingIgnoreCase(name);
+        if (devices.isEmpty())
+            System.out.println("Brak urządzeń o wskazanej nazwie");
+        else {
+            System.out.println("Znalezione urządzenia:");
+            devices.forEach(System.out::println);
+        }
     }
 }
